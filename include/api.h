@@ -62,7 +62,7 @@
 #include "pros/rtos.h"
 #include "pros/screen.h"
 #include "pros/vision.h"
-#include "pros/apix.h"
+// #include "pros/apix.h"
 
 #ifdef __cplusplus
 #include "pros/adi.hpp"
