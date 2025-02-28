@@ -6,7 +6,7 @@
 #define BPM 80
 
 #define C 1
-#define D 1
+#define D 100
 #define E 1
 #define F
 #define G
@@ -67,9 +67,9 @@ void opcontrol() {
 
 	playNote(C,1);
 	rest(1);
-	playNote(C,1);
-	rest(1);
 	playNote(D,1);
+	rest(1);
+	playNote(C,1);
 	rest(1);
 	playNote(D,1);
 	
