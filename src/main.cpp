@@ -1,7 +1,9 @@
 #include "main.h"
 
 #define MOTOR_PORT 21 
-#define BUMPER_PORT 'A'
+#define LIMIT_SWITCH 'A'
+#define WARNINGLED 'H'
+#define READYLED 'F'
 
 #define BPM 80
 
@@ -18,7 +20,9 @@
 
 // creating objects for readible code
 pros::Motor MainDrive(MOTOR_PORT);
-pros::ADIButton EndStop(BUMPER_PORT);
+pros::ADIButton EndStop(LIMIT_SWITCH);
+pros::ADILED Ready(READYLED, 1);
+pros::ADILED Warn(WARNINGLED, 1);
 
 //ms to bpm formula
 double noteLength = 60000/BPM ;
@@ -29,7 +33,9 @@ double noteLength = 60000/BPM ;
  * All other competition modes are blocked by initialize; it is recommended
  * to keep execution time for this mode under a few seconds.
  */
-void initialize() {}
+void initialize() {
+
+}
 
 void endStop() {
 	while (EndStop.get_value() == 0) {
