@@ -7,14 +7,17 @@
 
 #define BPM 80
 
-#define C1 -200
+#define C1 -403
 #define D1 
-#define E1 -100	
+#define E1 -303
 #define F1
-#define G1 0
+#define G1 -200
 #define A1
 #define B1
-#define C2 100
+#define C2 -100
+#define E2 3
+#define G2 100
+#define C3 200
 
 
 
@@ -40,13 +43,13 @@ void initialize() {
 
 void endStop() {
 	while (EndStop.get_value() == 0) {
-		MainDrive.move_relative(10 ,200);
-		Warn.set_value(1);
-		pros::delay(0.01);
+		MainDrive.move_relative(-100 ,200);
+		Warn.set_value(0);
+
 	}
 	MainDrive.brake();
 	MainDrive.set_zero_position_all(1000);
-	Warn.set_value(0);
+	Warn.set_value(1);
 	MainDrive.move_absolute(0,200);
 }
 
@@ -54,8 +57,8 @@ void endStop() {
 *note length is one for quarter 1/2 for eighth 2 for half etc...
 */
 void playNote(double note,double time){
-	Ready.set_value(1);
-	MainDrive.move_absolute(note,99999999);
+	Ready.set_value(0);
+	MainDrive.move_absolute(note,200);
 	pros::delay(time*noteLength); 
 }
 
@@ -63,8 +66,8 @@ void playNote(double note,double time){
 *note length is one for quarter 1/2 for eighth 2 for half etc...
 */
 void rest(double time){
-	Ready.set_value(0);
-	MainDrive.move_absolute(-10,200);
+	Ready.set_value(1);
+	//MainDrive.move_absolute(500,200);
 	pros::delay(time*noteLength); 
 }
 
@@ -74,26 +77,26 @@ void opcontrol() {
 	MainDrive.set_encoder_units_all(pros::E_MOTOR_ENCODER_DEGREES);
 	MainDrive.set_brake_mode(pros::E_MOTOR_BRAKE_BRAKE);
 	endStop();
-	pros::delay(500);
+	pros::delay(5000);
 
 	
-	playNote(C1,1);
+	playNote(C2,1);
 	rest(1);
-	playNote(G1,1);
-	rest(1);
-	playNote(C1,1);
-	rest(1);
-	playNote(E1,1);
-	rest(1);
-	playNote(C1,1);
-	rest(1);
-	playNote(E1,1);
-	rest(1);
-	playNote(G1,1);	
+	playNote(G2,1);
 	rest(1);
 	playNote(C2,1);
-	Ready.set_value(0);
-	Warn.set_value(1);
+	rest(1);
+	playNote(E2,1);
+	rest(1);
+	playNote(C2,1);
+	rest(1);
+	playNote(E2,1);
+	rest(1);
+	playNote(G2,1);	
+	rest(1);
+	playNote(C3,1);
+	Ready.set_value(1);
+	Warn.set_value(0);
 
 
 	// while (true) {
