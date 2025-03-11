@@ -1,4 +1,5 @@
 #include "main.h"
+#include <list>
 
 #define MOTOR_PORT -21 
 #define LIMIT_SWITCH 'A'
@@ -19,7 +20,9 @@
 #define G2 100
 #define C3 200
 
-
+// SONG ARRAYS use 999 for rest
+int Song[] = {C1,C2};
+int Time[] = {1,2};
 
 
 // creating objects for readible code
@@ -72,6 +75,18 @@ void rest(double time){
 }
 
 
+
+
+void play(){
+	int i;
+	for (i = 0; i == sizeof(Song); i++){
+
+		playNote(Time[i],Song[i]);
+
+	}
+        // if type(note) == str:     playNote(*note) 
+        // elif type(note) == str:     hold(note)
+}
 void opcontrol() {
 	
 	MainDrive.set_encoder_units_all(pros::E_MOTOR_ENCODER_DEGREES);
@@ -79,22 +94,25 @@ void opcontrol() {
 	endStop();
 	pros::delay(5000);
 
+	play();
 	
-	playNote(C2,1);
-	rest(1);
-	playNote(G2,1);
-	rest(1);
-	playNote(C2,1);
-	rest(1);
-	playNote(E2,1);
-	rest(1);
-	playNote(C2,1);
-	rest(1);
-	playNote(E2,1);
-	rest(1);
-	playNote(G2,1);	
-	rest(1);
-	playNote(C3,1);
+	// playNote(C2,1);
+	// rest(1);
+	// playNote(G2,1);
+	// rest(1);
+	// playNote(C2,1);
+	// rest(1);
+	// playNote(E2,1);
+	// rest(1);
+	// playNote(C2,1);
+	// rest(1);
+	// playNote(E2,1);
+	// rest(1);
+	// playNote(G2,1);	
+	// rest(1);
+	// playNote(C3,1);
+
+
 	Ready.set_value(1);
 	Warn.set_value(0);
 
